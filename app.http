@@ -1,0 +1,90 @@
+# # Create database
+POST https://cloud.appwrite.io/v1/databases HTTP/1.1
+Content-Type: application/json
+X-Appwrite-Response-Format: 1.5.0
+X-Appwrite-Project: X-Appwrite-Project
+X-Appwrite-Key: X-Appwrite-Key
+
+{
+  "databaseId": "unique()",
+  "name": "TodosDB",
+  "enabled": false
+}
+
+# # Create collection
+
+POST https://cloud.appwrite.io/v1/databases/<databaseID>/collections HTTP/1.1
+Content-Type: application/json
+X-Appwrite-Response-Format: 1.5.0
+X-Appwrite-Project: X-Appwrite-Project
+X-Appwrite-Key: X-Appwrite-Key
+
+{
+  "collectionId": "unique()",
+  "name": "TodosDB",
+  "permissions": ["read(\"any\")"],
+  "documentSecurity": false,
+  "enabled": false    
+}
+
+# # Create string attribute
+
+POST https://cloud.appwrite.io/v1/databases/<databaseID>/collections/<collectionID>/attributes/string HTTP/1.1
+Content-Type: application/json
+X-Appwrite-Response-Format: 1.5.0
+X-Appwrite-Project: X-Appwrite-Project
+X-Appwrite-Key: X-Appwrite-Key
+
+{
+  "key": "title",
+  "size": 255,
+  "required": true,
+  "array": false,
+  "encrypt": false
+}
+
+POST https://cloud.appwrite.io/v1/databases/<databaseID>/collections/<collectionID>/attributes/string HTTP/1.1
+Content-Type: application/json
+X-Appwrite-Response-Format: 1.5.0
+X-Appwrite-Project: X-Appwrite-Project
+X-Appwrite-Key: X-Appwrite-Key
+
+{
+    "key": "description",
+    "size": 255,
+    "required": true,
+    "array": false,
+    "encrypt": false
+}
+
+# # Create boolean attribute
+POST https://cloud.appwrite.io/v1/databases/<databaseID>/collections/<collectionID>/attributes/boolean HTTP/1.1
+Content-Type: application/json
+X-Appwrite-Response-Format: 1.5.0
+X-Appwrite-Project: X-Appwrite-Project
+X-Appwrite-Key: X-Appwrite-Key
+
+{
+  "key": "isComplete",
+  "required": true,
+  "default": false,
+  "array": false
+}
+
+# # Create document
+
+POST  https://cloud.appwrite.io/v1/databases/<databaseID>/collections/<collectionID>/documents HTTP/1.1
+Content-Type: application/json
+X-Appwrite-Response-Format: 1.5.0
+X-Appwrite-Project: X-Appwrite-Project
+X-Appwrite-Key: X-Appwrite-Key
+
+{
+  "documentId": "unique()",
+  "data": {
+    "title": "Buy apples",
+    "description": "At least 2KGs",
+    "isComplete": true
+  },
+  "permissions": ["read(\"any\")"]
+}
